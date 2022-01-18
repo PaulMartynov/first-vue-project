@@ -5,7 +5,7 @@
     variant="info">
     <b-navbar-brand :to="{ name: 'Home' }">Home</b-navbar-brand>
     <b-navbar-nav>
-      <b-nav-item href="#">Second root</b-nav-item>
+      <b-nav-item :to="{ name: 'UsersList' }">Users</b-nav-item>
       <b-nav-item href="#">Third root</b-nav-item>
     </b-navbar-nav>
   </b-navbar>

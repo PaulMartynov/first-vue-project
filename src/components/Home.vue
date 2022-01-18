@@ -1,6 +1,6 @@
 <template>
   <p class="homeText">
-    HOME-Root
+    HOME-Page
   </p>
 </template>
 
