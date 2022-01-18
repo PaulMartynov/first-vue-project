@@ -30,7 +30,7 @@
               <td>{{ `${user.address.city}, ${user.address.street}, ${user.address.suite}` }}</td>
               <td>{{ user.company.name }}</td>
               <td>
-                <b-button variant="default">Details</b-button>
+                <b-button variant="secondary">Details</b-button>
               </td>
               <td>
                 <b-button variant="success">Update</b-button>
