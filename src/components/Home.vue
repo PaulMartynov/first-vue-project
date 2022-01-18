@@ -5,8 +5,19 @@
 </template>
 
 <script>
+import UsersService from '@/api-services/users.service';
+
 export default {
   name: 'Home',
+  created() {
+    UsersService.getAll().then((response) => {
+      // eslint-disable-next-line no-console
+      console.log(response.data);
+    }).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error.response.data);
+    });
+  },
 };
 </script>
 
