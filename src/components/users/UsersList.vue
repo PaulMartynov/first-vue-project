@@ -23,22 +23,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr
-              v-for="user in users"
-              :key="user.id">
-              <td>{{ user.name }}</td>
-              <td>{{ `${user.address.city}, ${user.address.street}, ${user.address.suite}` }}</td>
-              <td>{{ user.company.name }}</td>
-              <td>
-                <b-button variant="secondary">Details</b-button>
-              </td>
-              <td>
-                <b-button variant="success">Update</b-button>
-              </td>
-              <td>
-                <b-button variant="danger">Delete</b-button>
-              </td>
-            </tr>
+              <users-list-row
+                v-for="user in users"
+                :key="user.id"
+                :user="user"
+                @details="detailsUser"
+                @update="updateUser"
+                @delete="deleteUser"
+              />
             </tbody>
           </table>
         </div>
@@ -49,9 +41,13 @@
 
 <script>
 import UsersService from '@/api-services/users.service';
+import UsersListRow from '@/components/users/UsersListRow';
 
 export default {
   name: 'UsersList',
+  components: {
+    UsersListRow,
+  },
   data() {
     return {
       users: [],
@@ -61,9 +57,19 @@ export default {
     UsersService.getAll().then((response) => {
       this.users = response.data;
     }).catch((error) => {
-      // eslint-disable-next-line no-console
       console.error(error.response.data);
     });
+  },
+  methods: {
+    detailsUser(userId) {
+      console.log('details', userId);
+    },
+    updateUser(userId) {
+      console.log('update', userId);
+    },
+    deleteUser(userId) {
+      this.users = this.users.filter(user => user.id !== userId);
+    },
   },
 };
 </script>
