@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td>{{ user.name }}</td>
+    <td>{{ user.username }}</td>
     <td>{{ `${user.address.city}, ${user.address.street}, ${user.address.suite}` }}</td>
     <td>{{ user.company.name }}</td>
     <td>

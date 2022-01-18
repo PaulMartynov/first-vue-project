@@ -14,7 +14,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>Name</th>
+              <th>Username</th>
               <th>Address</th>
               <th>Company</th>
               <th>Details</th>
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     detailsUser(userId) {
-      console.log('details', userId);
+      this.$router.push({ name: 'UserDetails', params: { id: userId } });
     },
     updateUser(userId) {
       console.log('update', userId);
