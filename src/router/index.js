@@ -7,7 +7,6 @@ import UsersList from '@/components/users/UsersList.component';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
