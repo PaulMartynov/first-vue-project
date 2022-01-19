@@ -39,6 +39,20 @@
         </div>
       </b-col>
     </b-row>
+    <b-modal
+      ref="deleteConfirmModal"
+      title="Confirm your action"
+      @ok="onDeleteConfirm"
+      @hide="onDeleteModalHide">
+      <p class="my-4">Are you sure you want to delete this user?</p>
+    </b-modal>
+
+    <b-modal
+      ref="alertModal"
+      :title="alertModalTitle"
+      :ok-only="true">
+      <p class="my-4">{{ alertModalContent }}</p>
+    </b-modal>
   </div>
 </template>
 
@@ -57,6 +71,9 @@ export default {
     return {
       users: [],
       loading: true,
+      selectedUserId: null,
+      alertModalTitle: '',
+      alertModalContent: '',
     };
   },
   created() {
@@ -76,7 +93,18 @@ export default {
       console.log('update', userId);
     },
     deleteUser(userId) {
-      this.users = this.users.filter(user => user.id !== userId);
+      this.selectedUserId = userId;
+      this.$refs.deleteConfirmModal.show();
+      // this.users = this.users.filter(user => user.id !== userId);
+    },
+    onDeleteConfirm() {
+      this.alertModalTitle = 'Successfully';
+      this.alertModalContent = 'Successfully deleted user';
+      this.$refs.alertModal.show();
+      this.users = this.users.filter(user => user.id !== this.selectedUserId);
+    },
+    onDeleteModalHide() {
+      this.selectedUserId = null;
     },
   },
 };
