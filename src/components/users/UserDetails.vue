@@ -1,5 +1,8 @@
 <template>
-  <div class="user-info">
+  <div v-if="loading">
+    <loader/>
+  </div>
+  <div v-else class="user-info">
     <div class="well">
       <div class="row">
         <div class="col-md-3">
@@ -63,11 +66,17 @@
 
 <script>
 import UsersService from '@/api-services/users.service';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'UserDetails',
+  components: { Loader },
+  comments: {
+    Loader,
+  },
   data() {
     return {
+      loading: true,
       user: {
         address: {},
       },
@@ -76,6 +85,7 @@ export default {
   created() {
     UsersService.get(this.$router.currentRoute.params.id).then((response) => {
       this.user = response.data;
+      this.loading = false;
     });
   },
 };

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="loading">
+    <loader/>
+  </div>
+  <div v-else>
     <b-row>
       <b-col
         md="2"
@@ -42,21 +45,26 @@
 <script>
 import UsersService from '@/api-services/users.service';
 import UsersListRow from '@/components/users/UsersListRow';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'UsersList',
   components: {
     UsersListRow,
+    Loader,
   },
   data() {
     return {
       users: [],
+      loading: true,
     };
   },
   created() {
     UsersService.getAll().then((response) => {
       this.users = response.data;
+      this.loading = false;
     }).catch((error) => {
+      this.loading = false;
       console.error(error.response.data);
     });
   },
